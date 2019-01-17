@@ -1,10 +1,2 @@
-coverage==4.5.1
 Django==2.1.5
 djangorestframework==3.9.1
-Jinja2==2.10
-kubeview==1.1.0
-MarkupSafe==1.0
-psutil==2.2.1
-pytz==2018.9
-tornado==5.1
-urllib3==1.22
