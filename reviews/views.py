@@ -6,6 +6,7 @@ from reviews.serializers import ReviewSerializer
 
 class ReviewsViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
+    queryset = Review.objects.all()
 
     def get_queryset(self):
         user = self.request.user
