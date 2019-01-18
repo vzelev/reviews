@@ -6,3 +6,4 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         exclude = ['user']
+        read_only_fields = ['submission_date', 'ip']
