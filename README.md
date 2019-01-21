@@ -6,6 +6,10 @@ The script `cli.sh` is able to build a `docker` image out of the current project
 
 # Running locally
 
+There are two modes of running the app
+* Normal mode: Run within "encapsulated" docker container, i.e. whatever changes you make in your DB, once you stop the container, it's gone. The project/source files are only visible in the container and they can be changed only if you ssh to it
+* Locally (dev) mode: Run a docker container with mounted `pwd`. The project files from your disk are mounted and used by the docker container. Sqlite3 DB is also created there, so your changes will be saved. You can stop and run the container safely
+
 ## Just want to run it?
 There is a `docker` integration, so the application can be very easy run locally by simply installing Docker and then using the system script `cli.sh` which is self-explained.
 E.g. `./cli.sh br` will `build & run` it. You can ship the docker image to everyone, or in some docker repo and everyone can run it by calling `./cli.sh r`
@@ -25,6 +29,9 @@ NB: If you run that command in `locally` setup, i.e. after `cli.sh rl|brl` the c
 
 Warning: if you see an error like `Error: No such container: bash` it means that the container is not running, please run `./cli.sh r|br|rl|brl` first
 
+## exec
+You can easily ssh to the container or just execute a command there by simply `./cli.sh exec <command>`
+
 # API docs
 Open `http://localhost:8000/docs`
-Swagger uses Session authentication to call the endpoints due to it's limits. It provides
+Swagger uses Session authentication to call the endpoints due to it's limits.
