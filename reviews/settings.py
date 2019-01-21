@@ -29,7 +29,20 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+    'LOGIN_URL': '/api-auth/login',
+    'LOGOUT_URL': '/api-auth/logout',
+    'USE_SESSION_AUTH': True,
+    'JSON_EDITOR': True,
+    'DOC_EXPANSION': 'list',
+}
 
 INSTALLED_APPS = [
     'django.contrib.sites',
@@ -41,7 +54,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'reviews'
+    'reviews',
+    'rest_framework_swagger',
 ]
 SITE_ID = 1
 
@@ -49,7 +63,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -57,8 +70,9 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    )
+    'rest_framework.authentication.TokenAuthentication',
+    'rest_framework.authentication.SessionAuthentication'
+)
 }
 
 ROOT_URLCONF = 'reviews.urls'

@@ -24,3 +24,7 @@ Once you build & run it, you could create a super user for django admin, or run 
 NB: If you run that command in `locally` setup, i.e. after `cli.sh rl|brl` the changes of the command will affect the `pwd` folder you already mounted by running the app locally
 
 Warning: if you see an error like `Error: No such container: bash` it means that the container is not running, please run `./cli.sh r|br|rl|brl` first
+
+# API docs
+Open `http://localhost:8000/docs`
+Swagger uses Session authentication to call the endpoints due to it's limits. It provides

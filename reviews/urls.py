@@ -19,18 +19,23 @@ from rest_framework import routers
 from rest_framework.authtoken import views as auth_views
 
 from reviews import views
+from rest_framework_swagger.views import get_swagger_view
+
 
 router = routers.DefaultRouter()
 router.register(r'reviews', views.ReviewsViewSet)
 router.register(r'register', views.RegisterView)
 
-urlpatterns = [
+
+
+documented_urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+    path('obtain-api-token/', auth_views.obtain_auth_token),
 ]
 
-urlpatterns += [
-    path('api-auth/', include('rest_framework.urls')),
-    path('api-token-auth/', auth_views.obtain_auth_token)
-]
+docs = get_swagger_view(title='Reviews API', patterns=documented_urlpatterns)
+urlpatterns = [path('docs/', docs, name='docs')] + documented_urlpatterns
+
 

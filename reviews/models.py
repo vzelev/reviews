@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib import admin
 
 
 class Review(models.Model):
@@ -14,3 +15,4 @@ class Review(models.Model):
     company = models.CharField(max_length=255)
     reviewer = models.CharField(max_length=255)
 
+admin.site.register(Review)
