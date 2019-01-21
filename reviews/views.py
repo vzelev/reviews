@@ -1,9 +1,11 @@
+from django.contrib.auth import get_user_model
 from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from reviews.models import Review
-from reviews.serializers import ReviewSerializer
+from reviews.serializers import ReviewSerializer, UserSerializer, UserRegistrationSerializer
 
 
 class ReviewsViewSet(mixins.CreateModelMixin,
@@ -27,4 +29,8 @@ class ReviewsViewSet(mixins.CreateModelMixin,
             ip = self.request.META.get('REMOTE_ADDR')
         serializer.save(ip=ip, user=self.request.user)
 
+
+class RegisterView(mixins.CreateModelMixin, GenericViewSet):
+    serializer_class = UserRegistrationSerializer
+    queryset = get_user_model().objects.all()
 
