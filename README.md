@@ -20,7 +20,7 @@ The project build & run rely on Docker. Visit https://www.docker.com/products/do
 
 # Build
 The script `cli.sh` is able to build a `docker` image out of the current project files on your drive
-E.g. `./cli.sh build` - this will build a docker image based on `python:3` and tag it as `reviews`
+E.g. `./cli.sh build` - this will build a docker image based on `python:3-alpine` and tag it as `reviews`
 This phase automatically install all dependencies, run DB migrations and run the tests. So, you don't need to do anything else. For local setup, please read below.
 
 
