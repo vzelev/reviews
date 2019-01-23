@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from rest_framework import mixins, response
+from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 
@@ -44,3 +44,7 @@ class RegisterView(mixins.CreateModelMixin, GenericViewSet):
     serializer_class = UserRegistrationSerializer
     queryset = get_user_model().objects.all()
 
+    def create(self, request, *args, **kwargs):
+        resp = super().create(request, *args, **kwargs)
+        resp.data = {}
+        return resp

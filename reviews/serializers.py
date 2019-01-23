@@ -39,7 +39,11 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
+
 class UserRegistrationSerializer(serializers.Serializer):
+    '''
+    User registration serializer. Used to wrap the Model serializer and provide confirm_password fiedl
+    '''
     class Meta:
         write_only_fields = ('password', 'confirm_password')
 
