@@ -6,11 +6,10 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from reviews.models import Review
-from reviews.serializers import ReviewSerializer
 
 
 class UserRegistrationAPIViewTestCase(APITestCase):
-    url = '/api-auth/register/'
+    url = '/api/v1/api-auth/register/'
 
     def test_invalid_password(self):
         user_data = {
@@ -62,7 +61,7 @@ class UserRegistrationAPIViewTestCase(APITestCase):
 
 
 class UserObtainTokenAPIViewTestCase(APITestCase):
-    url = '/api-auth/obtain-api-token/'
+    url = '/api/v1/api-auth/obtain-api-token/'
 
     def setUp(self):
         self.username = 'john'
@@ -85,7 +84,7 @@ class UserObtainTokenAPIViewTestCase(APITestCase):
 
 
 class UserTokenAPIViewTestCase(APITestCase):
-    url = '/reviews/'
+    url = '/api/v1/reviews/'
 
     def setUp(self):
         self.username = 'user1'

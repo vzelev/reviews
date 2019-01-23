@@ -4,38 +4,44 @@ case "$1" in
     "help"|"")
         cat << EOF
 Usage: $0 command [parameters]
-    build|b
+    build
         Build docker image
-    run|r
+    run
         run the application on port 8000
-    run-locally|rl
+    run-locally
         run the application on port 8000 mounting the pwd as a docker working dir
-    build-and-run|br
+    build-and-run
        build docker image and run it
-    build-and-run-locally|brl
+    build-and-run-locally
        build docker image and run it mounting the pwd as a docker working dir
+    manage.py <command>
+       Run django <command> against manage.py
+    exec <command>
+       Run <command> inside the container. It can be whatever you want
+    test
+       Run Django tests
 EOF
         ;;
-    "b"|"build")
+    "build")
         docker build -t reviews . || exit 1
         ;;
-     "r"|"run")
+     "run")
         echo "Running on localhost:8000"
         docker run -p 8000:8000 reviews
         ;;
-     "rl"|"run-locally")
+     "run-locally")
         echo "Running on localhost:8000"
         docker run -v `pwd`:/app -p 8000:8000 reviews
         ;;
-      "build-and-run"|"br")
-        $0 b
-        $0 r
+      "build-and-run")
+        $0 build
+        $0 run
         ;;
-      "build-and-run-locally"|"brl")
-        $0 b
+      "build-and-run-locally")
+        $0 build
         echo Build was successfull. Running...
         echo "PLEASE, IF YOU HAVEN'T RUN ./cli.sh manage.py migrate, run it in separate tab now!"
-        $0 rl
+        $0 run-locally
         ;;
       "manage.py")
         $0 exec "python /app/manage.py $2"

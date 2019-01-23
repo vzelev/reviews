@@ -14,10 +14,13 @@
 * Company - information about the company for which the review was submitted, can be simple text (e.g., name, company id, etc.) or a separate model altogether
 * Reviewer Metadata - information about the reviewer, can be simple text (e.g., name, email, reviewer id, etc.) or a separate model altogether
 
+# Overview
+
+The project build & run rely on Docker. Visit https://www.docker.com/products/docker-desktop to download and install it
 
 # Build
 The script `cli.sh` is able to build a `docker` image out of the current project files on your drive
-E.g. `./cli.sh build|b` - this will build a docker image based on `python:3` and tag it as `reviews`
+E.g. `./cli.sh build` - this will build a docker image based on `python:3` and tag it as `reviews`
 This phase automatically install all dependencies, run DB migrations and run the tests. So, you don't need to do anything else. For local setup, please read below.
 
 
@@ -34,7 +37,7 @@ E.g. `./cli.sh br` will `build & run` it. You can ship the docker image to every
 ## Run and develop - `Local` mode
 ### First time you run it in dev mode - run `./cli.sh manage.py migrate` to create the DB
 For developing purposes you can either run it using virtualenv, local python3 (if you have such) or again `docker`.
-Call `./cli.sh brl|build-and-run-locally` which will use the python code from the `pwd` (currently working dir) instead of the built-in one
+Call `./cli.sh build-and-run-locally` which will use the python code from the `pwd` (currently working dir) instead of the built-in one
 
 Note: When you run the docker container "locally", i.e. mounting host directory, the host dir should contain the whole project `reviews`. The `build` step will create `db.sqlite3` file - the DB
 NB: The Django dev server is auto-restarting on every code modification
@@ -43,9 +46,9 @@ NB: The Django dev server is auto-restarting on every code modification
 ## manage.py
 Once you build & run it, you could create a super user for django admin, or run migrations, etc. by running `./cli.sh manage.py <command>`
 
-NB: If you run that command in `locally` setup, i.e. after `cli.sh rl|brl` the changes of the command will affect the `pwd` folder you already mounted by running the app locally
+NB: If you run that command in `locally` setup, i.e. after `./cli.sh run-locally` or `./cli.sh build-and-run-locally` the changes of the command will affect the `pwd` folder you already mounted by running the app locally
 
-Warning: if you see an error like `Error: No such container: bash` it means that the container is not running, please run `./cli.sh r|br|rl|brl` first
+Warning: if you see an error like `Error: No such container: bash` it means that the container is not running, please run `./cli.sh run` or `./cli.sh run-locally` first
 
 ## test
 `/cli.sh test` is a shortcut to run the django tests against a running container. Anyway, they are automatically run on every build
@@ -74,4 +77,7 @@ Once the user has been registered successfully, he/she could obtain a token usin
 
 # Admin
 
-Django admin is fully functional, it can be accessed on `/admin` page. Enjoy!
+Django admin is fully functional, it can be accessed on `/admin` page.
+## Creating superuser
+`./cli.sh manage.py createsuperuser`
+Enjoy!
