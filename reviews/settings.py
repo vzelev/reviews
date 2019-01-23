@@ -37,8 +37,8 @@ SWAGGER_SETTINGS = {
             'name': 'Authorization'
         }
     },
-    'LOGIN_URL': '/api-auth/login',
-    'LOGOUT_URL': '/api-auth/logout',
+    'LOGIN_URL': '/api/v1/api-auth/login',
+    'LOGOUT_URL': '/api/v1/api-auth/logout',
     'USE_SESSION_AUTH': True,
     'JSON_EDITOR': True,
     'DOC_EXPANSION': 'list',

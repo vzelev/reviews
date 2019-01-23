@@ -29,13 +29,13 @@ router.register(r'api-auth/register', views.RegisterView)
 
 
 documented_urlpatterns = [
-    path('', include(router.urls)),
+    path('api/v1/', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('api-auth/obtain-api-token/', auth_views.obtain_auth_token),
-    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/api-auth/obtain-api-token/', auth_views.obtain_auth_token),
+    path('api/v1/api-auth/', include('rest_framework.urls')),
 ]
 
 docs = get_swagger_view(title='Reviews API', patterns=documented_urlpatterns)
-urlpatterns = [path('docs/', docs, name='docs')] + documented_urlpatterns
+urlpatterns = [path('', docs, name='docs')] + documented_urlpatterns
 
 
