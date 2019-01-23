@@ -32,14 +32,15 @@ There are two modes of running the app
 
 ## Just want to run it - use the `Normal` mode
 There is a `docker` integration, so the application can be very easy run locally by simply installing Docker and then using the system script `cli.sh` which is self-explained.
-E.g. `./cli.sh br` will `build & run` it. You can ship the docker image to everyone, or in some docker repo and everyone can run it by calling `./cli.sh r`
+E.g. `./cli.sh build-and-run`. You can ship the docker image to everyone, or in some docker repo and everyone can run it by calling `./cli.sh run`
 
 ## Run and develop - `Local` mode
 ### First time you run it in dev mode - run `./cli.sh manage.py migrate` to create the DB
 For developing purposes you can either run it using virtualenv, local python3 (if you have such) or again `docker`.
 Call `./cli.sh build-and-run-locally` which will use the python code from the `pwd` (currently working dir) instead of the built-in one
 
-Note: When you run the docker container "locally", i.e. mounting host directory, the host dir should contain the whole project `reviews`. The `build` step will create `db.sqlite3` file - the DB
+Note: When you run the docker container "locally", i.e. mounting host directory, the host dir should contain the whole project `reviews`. The `build` step will create `db.sqlite3` file - the DB `INSIDE` the container, so you need to run `./cli.sh manage.py migrate` if you haven't in order to create the DB locally
+
 NB: The Django dev server is auto-restarting on every code modification
 
 
@@ -81,3 +82,25 @@ Django admin is fully functional, it can be accessed on `/admin` page.
 ## Creating superuser
 `./cli.sh manage.py createsuperuser`
 Enjoy!
+
+# CURL Examples
+
+```
+curl --request GET \
+  --url http://localhost:8000/reviews/ \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Token SOMETOKEN' \
+  --header 'Content-Type: application/json' \
+  --header 'Postman-Token: f43ddbd5-39fb-4f57-a68a-d620085b401a' \
+  --header 'cache-control: no-cache'
+```
+
+```
+curl --request POST \
+  --url http://localhost:8000/reviews/ \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Token SOMETOKEN' \
+  --header 'Content-Type: application/json' \
+  --header 'Postman-Token: f43ddbd5-39fb-4f57-a68a-d620085b401a' \
+  --header 'cache-control: no-cache'
+```
