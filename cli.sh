@@ -40,6 +40,9 @@ EOF
       "manage.py")
         $0 exec "python /app/manage.py $2"
         ;;
+       "test")
+        $0 manage.py test
+        ;;
       "exec")
         docker exec -it `docker ps | grep reviews | cut -d " " -f 1` bash -c "$2"
         ;;

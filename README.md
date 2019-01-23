@@ -34,4 +34,14 @@ You can easily ssh to the container or just execute a command there by simply `.
 
 # API docs
 Open `http://localhost:8000/docs`
-Swagger uses Session authentication to call the endpoints due to it's limits.
+Swagger uses Session authentication to call the endpoints due to it's limits. Please note that the protected endpoints, i.e. `/reviews/` are not visible in Swagger if there is no active Session, so please use the `Session Login` button to login and the you will be able to see and call them.
+
+
+
+# User registration
+
+User registration is handled by `/api-auth/register/` endpoint. Please, refer to the `/docs/` endpoint for more information
+
+# API Token obtaining
+
+Once the user has been registered successfully, he/she could obtain a token using the `/api-auth/obtain-api-token/` endpoint. Please, refer to the `/docs/` endpoint for more information

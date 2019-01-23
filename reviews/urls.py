@@ -24,15 +24,15 @@ from rest_framework_swagger.views import get_swagger_view
 
 router = routers.DefaultRouter()
 router.register(r'reviews', views.ReviewsViewSet)
-router.register(r'register', views.RegisterView)
+router.register(r'api-auth/register', views.RegisterView)
 
 
 
 documented_urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('api-auth/obtain-api-token/', auth_views.obtain_auth_token),
     path('api-auth/', include('rest_framework.urls')),
-    path('obtain-api-token/', auth_views.obtain_auth_token),
 ]
 
 docs = get_swagger_view(title='Reviews API', patterns=documented_urlpatterns)
