@@ -20,6 +20,10 @@ Usage: $0 command [parameters]
        Run <command> inside the container. It can be whatever you want
     test
        Run Django tests
+     virtenv-create
+       Create virtual env and prepare the data and run the tests
+     virtenv-run
+       Run the server
 EOF
         ;;
     "build")
@@ -27,11 +31,11 @@ EOF
         ;;
      "run")
         echo "Running on localhost:8000"
-        docker run -p 8000:8000 reviews
+        docker run --network host reviews
         ;;
      "run-locally")
         echo "Running on localhost:8000"
-        docker run -v `pwd`:/app -p 8000:8000 reviews
+        docker run -v `pwd`:/app reviews
         ;;
       "build-and-run")
         $0 build
@@ -50,6 +54,20 @@ EOF
         $0 manage.py test
         ;;
       "exec")
-        docker exec -it `docker ps | grep reviews | cut -d " " -f 1` bash -c "$2"
+        docker exec -it `docker ps | grep reviews | cut -d " " -f 1` sh -c "$2"
         ;;
+       "virtenv-create")
+         pip3 install virtualenv
+         virtualenv ./venv -p `which python3`
+         source ./venv/bin/activate
+         python3 -m pip install -r requirements.txt
+         python3 manage.py migrate
+         python3 manage.py test
+         deactivate
+         ;;
+        "virtenv-run")
+         source ./venv/bin/activate
+         ./venv/bin/python3 manage.py runserver
+         ;;
+
 esac

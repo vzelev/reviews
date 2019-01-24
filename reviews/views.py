@@ -28,6 +28,10 @@ class ReviewsViewSet(mixins.CreateModelMixin,
         return Review.objects.filter(user=user)
 
     def perform_create(self, serializer):
+        # In docker swarm mode this IP could be the the docker proxy IP.
+        # Unfortunately, there is no solution at the moment by Docker, just a workaround, i.e. running in `host` network
+        # which under MacOS is not working good. Under Linux distributions it should be fine, as well as in Kubernetes, Clouds, etc
+        # see issue: https://github.com/moby/moby/issues/25526
         x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
             ip = x_forwarded_for.split(',')[0]
