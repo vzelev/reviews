@@ -13,6 +13,6 @@ class Review(models.Model):
     ip = models.GenericIPAddressField()
     submission_date = models.DateTimeField(default=datetime.datetime.now)
     company = models.CharField(max_length=255)
-    reviewer = models.CharField(max_length=255)
+    reviewer = models.CharField(max_length=255, blank=True, null=True)
 
 admin.site.register(Review)

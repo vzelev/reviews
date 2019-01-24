@@ -31,11 +31,11 @@ EOF
         ;;
      "run")
         echo "Running on localhost:8000"
-        docker run --network host reviews
+        docker run -p 8000:8000 reviews
         ;;
      "run-locally")
         echo "Running on localhost:8000"
-        docker run -v `pwd`:/app reviews
+        docker run -p 8000:8000 -v `pwd`:/app reviews
         ;;
       "build-and-run")
         $0 build

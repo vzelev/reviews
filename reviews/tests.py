@@ -108,7 +108,6 @@ class UserTokenAPIViewTestCase(APITestCase):
             "title": "string",
             "summary": "string",
             "company": "string",
-            "reviewer": "string"
         }
 
         review_2 = {
@@ -116,7 +115,6 @@ class UserTokenAPIViewTestCase(APITestCase):
             "title": "string",
             "summary": "string",
             "company": "string",
-            "reviewer": "string"
         }
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token_1.key)
         response_1 = self.client.post(self.url, data=review_1)
@@ -139,7 +137,6 @@ class UserTokenAPIViewTestCase(APITestCase):
             "title": "string",
             "summary": "string",
             "company": "string",
-            "reviewer": "string"
         }
 
         review_2 = {
@@ -147,7 +144,6 @@ class UserTokenAPIViewTestCase(APITestCase):
             "title": "string",
             "summary": "string",
             "company": "string",
-            "reviewer": "string"
         }
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token_1.key)
         response_1 = self.client.post(self.url, data=review_1)
@@ -166,15 +162,13 @@ class UserTokenAPIViewTestCase(APITestCase):
             "title": "string2",
             "summary": "string",
             "company": "string",
-            "reviewer": "string"
         }
 
         review_2_2 = {
             "rating": 2,
             "title": "string",
             "summary": "string",
-            "company": "string",
-            "reviewer": "string2"
+            "company": "stringss",
         }
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token_2.key)
         response_1_2 = self.client.post(self.url, data=review_1_2)

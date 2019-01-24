@@ -7,8 +7,8 @@ from reviews.models import Review
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        exclude = ['user']
-        read_only_fields = ['submission_date', 'ip']
+        exclude = ['user', 'reviewer', 'ip']
+        read_only_fields = ['submission_date']
 
 
 class UserSerializer(serializers.ModelSerializer):
