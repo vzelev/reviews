@@ -18,14 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
         write_only_fields = ('password',)
         read_only_fields = ('id',)
 
-    def validate(self, data):
-        """
-        Check that start is before finish.
-        """
-        if data['password'] != data['password']:
-            raise serializers.ValidationError("Password and Repeat Password are different")
-        return data
-
     def create(self, validated_data):
         user = get_user_model().objects.create(
             username=validated_data['username'],
@@ -42,7 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserRegistrationSerializer(serializers.Serializer):
     '''
-    User registration serializer. Used to wrap the Model serializer and provide confirm_password fiedl
+    User registration serializer. Used to wrap the Model serializer and provide confirm_password field
     '''
     class Meta:
         write_only_fields = ('password', 'confirm_password')
